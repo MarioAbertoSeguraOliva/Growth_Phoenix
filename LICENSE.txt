@@ -1,0 +1,24 @@
+Proprietary License Agreement
+
+Copyright (c) 2024 Mario A. Segura Oliva. All rights reserved.
+
+This software and accompanying documentation are proprietary products of Mario A. Segura Oliva. Use of this software is restricted to the terms set forth in this agreement.
+
+1. License Grant:
+   Mario A. Segura Oliva grants you a non-transferable, non-exclusive license to use the software for personal or internal use only. You are not permitted to:
+   - Distribute, sell, lease, rent, or sublicense the software.
+   - Modify, reverse-engineer, or create derivative works from the software.
+   - Use the software for any commercial purposes without express written permission from Mario A. Segura Oliva.
+
+2. Ownership:
+   All rights, title, and interest in the software, including intellectual property rights, remain with Mario A. Segura Oliva. No rights are granted except for the limited license specified above.
+
+3. Termination:
+   This license is effective until terminated. It will terminate automatically if you fail to comply with any of the terms and conditions in this agreement. Upon termination, you must immediately stop using and destroy all copies of the software.
+
+4. No Warranty:
+   The software is provided "AS IS", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall Mario A. Segura Oliva be liable for any damages, whether direct, indirect, incidental, or consequential, arising out of the use or inability to use the software.
+
+By installing or using this software, you agree to the terms and conditions of this proprietary license.
+
+For inquiries or licensing information, contact Mario A. Segura Oliva at marioalbertoseguraoliva@gmail.com.
