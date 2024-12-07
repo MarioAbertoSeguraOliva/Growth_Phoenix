@@ -1,6 +1,19 @@
 # Changelog
+## [Unreleased] 
 
-## [Unreleased]
+### Added
+- Implemented MongoDB support with Mongoose for user data management.
+- Created a User collection in MongoDB to store and manage user information.
+- Updated the project with routes and form handling for adding new users.
+
+### Changed
+- Incorporated EJS for rendering dynamic views and templates, allowing the display of user data.
+
+### Fixed
+    Fixed issues related to form submission and data validation for user creation.
+    
+### [0.0.3] - 2024-12-07
+
 ### Added
 - Incorporated header with today's date.
 

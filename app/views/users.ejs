@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+  </head>
+  <body>
+    <table id="myTable" class="table table-striped text-center">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Email or name</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr>
+          <td><%= 1 %></td>
+          <td><%= user.email %></td>
+          <td><%= user.password %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div class="registration-form">
+      <form action="/users/add" method="POST">
+        <div class="form-icon">
+          <span><i class="icon icon-user"></i></span>
+        </div>
+        <div class="phoenix-form-highlight">
+          <p class="text-center">🐦‍🔥 Join the community! 🐦‍🔥</p>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control item"
+            name="email"
+            id="email"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control item"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-block create-account">
+            Create Account
+          </button>
+        </div>
+      </form>
+      <div class="social-media">
+        <h5>Sign up with social media</h5>
+        <div class="social-icons">
+          <a href="#"><i class="icon-social-facebook" title="Facebook"></i></a>
+          <a href="#"><i class="icon-social-google" title="Google"></i></a>
+          <a href="#"><i class="icon-social-twitter" title="Twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"
+    ></script>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#myTable").dataTable();
+      });
+    </script>
+  </body>
+</html>
