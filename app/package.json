@@ -1,6 +1,7 @@
 {
   "name": "growth-phoenix",
   "version": "0.0.1",
+  "type": "module",
   "private": true,
   "main": "app.js",
   "scripts": {
@@ -16,6 +17,11 @@
     "http-errors": "~1.6.3",
     "mongodb": "6.11.0",
     "dotenv": "16.4.7",
+    "express-session": "1.18.1",
+    "passport": "0.7.0",
+    "passport-google-oauth20": "^2.x.x",
+    "bcrypt": "5.1.1",
+    "express-validator": "7.2.0",
     "morgan": "~1.9.1"
   },
   "devDependencies": {

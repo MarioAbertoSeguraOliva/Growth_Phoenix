@@ -1,6 +1,14 @@
 # Changelog
-## [Unreleased] 
 
+## [Unreleased] 
+### Changed
+- Incorporated EJS for rendering dynamic views and templates, allowing the display of user data.
+- Migrated project from CommonJS to ES6 Modules for modern syntax and improved module handling.
+
+### Fixed
+- Fixed issues related to form submission and data validation for user creation.
+
+## [0.0.4] 2024-12-10 
 ### Added
 - Implemented MongoDB support with Mongoose for user data management.
 - Created a User collection in MongoDB to store and manage user information.
@@ -13,7 +21,6 @@
     Fixed issues related to form submission and data validation for user creation.
     
 ### [0.0.3] - 2024-12-07
-
 ### Added
 - Incorporated header with today's date.
 

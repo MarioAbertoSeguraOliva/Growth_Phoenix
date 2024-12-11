@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/User');
+import { Router } from 'express';
+import { User } from '../models/User.js';
+const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await find();
     console.log(users);
     res.render('users', { title: 'Users', users });
   } catch (err) {
@@ -25,8 +25,7 @@ router.post('/add', async (req, res) => {
     console.log(req.body);
     console.error('Error adding user:', err);
     res.redirect('/users')
-    // res.status(500).send('Error adding user');
   }
 });
 
-module.exports = router;
+export default router;
