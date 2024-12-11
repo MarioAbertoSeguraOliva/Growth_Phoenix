@@ -1,30 +1,30 @@
-import { Router } from 'express';
-import { User } from '../models/User.js';
+import { Router } from "express";
+import { User } from "../models/User.js";
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const users = await find();
+    const users = await User.find();
     console.log(users);
-    res.render('users', { title: 'Users', users });
+    res.render("users", { title: "Users", users });
   } catch (err) {
-    console.error('Error fetching users:', err);
-    res.status(500).send('Error fetching users');
+    console.error("Error fetching users:", err);
+    res.status(500).send("Error fetching users");
   }
 });
 
-router.post('/add', async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const newUser = new User({ email, password });
     await newUser.save();
-    console.log('User added:', newUser);
-    res.redirect('/users');
+    console.log("User added:", newUser);
+    res.redirect("/users");
   } catch (err) {
     console.log(req.body);
-    console.error('Error adding user:', err);
-    res.redirect('/users')
+    console.error("Error adding user:", err);
+    res.redirect("/users");
   }
 });
 

@@ -1,27 +1,42 @@
-import { Register } from "../controllers/auth.js";
-import Validate from "../middlewares/validate.js";
+import { Router } from "express";
 import { check } from "express-validator";
-import { Router } from 'express';
+import { Register, Login, Logout } from "../controllers/auth.js";
 
 const router = Router();
 
-// Register route -- POST request
 router.post(
-    "/register",
+  "/register",
+  [
     check("email")
-        .isEmail()
-        .withMessage("Enter a valid email address")
-        .normalizeEmail(),
+      .isEmail()
+      .withMessage("Enter a valid email address")
+      .normalizeEmail(),
     check("password")
-        .notEmpty()
-        .isLength({ min: 8 })
-        .withMessage("Must be at least 8 chars long"),
-    Validate,
-    Register
+      .notEmpty()
+      .withMessage("Password is required")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters long"),
+  ],
+  Register
 );
 
-router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Growth Phoenix Website' });
+router.post(
+  "/login",
+  [
+    check("email").isEmail().withMessage("Enter a valid email address"),
+    check("password").notEmpty().withMessage("Password is required"),
+  ],
+  Login
+);
+
+router.get("/register", (req, res) => {
+  res.render("register", {
+    title: "Growth Phoenix Website",
+    errors: [],
+    oldInput: {},
+  });
 });
+
+router.post("/logout", Logout);
 
 export default router;
