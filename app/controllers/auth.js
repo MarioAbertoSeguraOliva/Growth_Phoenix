@@ -9,11 +9,16 @@ import { validationResult } from "express-validator";
  */
 export async function Register(req, res) {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
+        if (errors.errors.find(err => err.path === 'email'))
+            req.flash('error', 'Invalid email address. Please try again.');
+        
         return res.render("register", {
-            title: "Growth Phoenix Website",
+            title: "Register",
             errors: errors.array(),
             oldInput: req.body,
+            messages: req.flash(),
         });
     }
 
@@ -21,25 +26,24 @@ export async function Register(req, res) {
 
     try {
         const existingUser = await User.findOne({ email });
-        if (existingUser)
-            return res.status(400).json({
-                status: "failed",
-                message: "It seems you already have an account, please log in instead.",
-            });
+        if (existingUser){
+            req.flash('error', 'This username was already taken');
+            return res.redirect('back');
+        }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const sanitizedPassword = password.trim();
+    
         const newUser = new User({
             email,
-            password: hashedPassword,
+            password: sanitizedPassword,
         });
 
         const savedUser = await newUser.save();
         const { role, ...user_data } = savedUser._doc;
 
-        res.render("login", { 
-            title: "Login", 
-            message: "Thank you for registering! Please log in to continue." 
-        });
+        req.flash('success', 'You have been successfully registered! Please log in.');
+        res.redirect("/auth/login");
+
     } catch (err) {
         console.error(err);
         res.status(500).json({
@@ -57,6 +61,7 @@ export async function Login(req, res) {
             title: "Login",
             errors: errors.array(),
             oldInput: req.body,
+            messages: req.flash()
         });
     }
 
@@ -65,22 +70,27 @@ export async function Login(req, res) {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({
-                status: "failed",
-                message: "User not found. Please register.",
-            });
+            req.flash('error', 'User not found. Please register');
+            return res.redirect('/auth/login');
         }
-
-        const isMatch = await bcrypt.compare(password, user.password);
+        
+        const isMatch = await bcrypt.compare(password.trim(), user.password);
         if (!isMatch) {
-            return res.status(400).json({
-                status: "failed",
-                message: "Incorrect password.",
-            });
+            req.flash('error', 'Incorrect password.');
+            return res.redirect('/auth/login');
         }
 
+        req.flash('success', 'Welcome back!');
         req.session.user = user; // Example with sessions
-        res.redirect("/dashboard"); // Redirect to the user's dashboard or home page
+        console.log(req.session);
+        
+        return res.render("dashboard", {
+            title: "Dashboard",
+            errors: errors.array(),
+            messages: req.flash(),
+            user: req.session.user,
+        });
+        
     } catch (err) {
         console.error(err);
         res.status(500).json({
@@ -95,15 +105,12 @@ export async function Login(req, res) {
  * Log out the user
  */
 export function Logout(req, res) {
-    // Destroy session or clear auth tokens
     req.session.destroy((err) => {
         if (err) {
-            return res.status(500).json({
-                status: "error",
-                message: "Could not log out, please try again later.",
-            });
+            req.flash("error", "Could not log out, please try again later.");
+            return res.redirect("/");
         }
-
-        res.redirect("/login"); // Redirect to login after logout
+        req.flash("success", "You have been logged out successfully.");
+        res.redirect("/");
     });
 }

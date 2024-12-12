@@ -34,6 +34,14 @@ router.get("/register", (req, res) => {
     title: "Growth Phoenix Website",
     errors: [],
     oldInput: {},
+    messages: req.flash()
+  });
+});
+
+router.get("/login", (req, res) => {
+  res.render("login", {
+    title: "Login",
+    messages: req.flash()
   });
 });
 

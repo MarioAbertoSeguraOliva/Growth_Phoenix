@@ -5,7 +5,8 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from 'url';
 import morgan from "morgan";
-import session from "./config/session.js";
+import flash from "connect-flash";
+import sessionConfig from "./config/session.js";
 import connectDB from "./config/db.js";
 import createError from "http-errors";
 import expressLayouts from "express-ejs-layouts";
@@ -18,7 +19,16 @@ import authRouter from "./routes/auth.js";
 
 const app = express();
 
+app.use(sessionConfig)
+app.use(flash());
+
 connectDB();
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  res.locals.messages = req.flash();
+  next();
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,8 +43,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use(session);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   try {
     const users = await User.find();
     console.log(users);
-    res.render("users", { title: "Users", users });
+    res.render("users", { title: "Users", users, messages: req.flash() });
   } catch (err) {
     console.error("Error fetching users:", err);
     res.status(500).send("Error fetching users");

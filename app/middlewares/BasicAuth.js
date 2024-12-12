@@ -1,12 +1,9 @@
-import { express } from 'express';
+import express from 'express';
 const router = express.Router();
 
 const isAuthenticated = (req, res, next) => {
-  if (req.session && req.session.user) 
-    return next(); 
-  
-  res.redirect('/auth/login'); 
+  if (req.session.user) next();
+  next('/auth/login'); 
 };
 
-
-module.exports = isAuthenticated;
+export default isAuthenticated;

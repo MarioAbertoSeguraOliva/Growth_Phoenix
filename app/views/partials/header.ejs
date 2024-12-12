@@ -1,5 +1,4 @@
 <header>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
@@ -103,8 +102,22 @@
         </ul>
       </div>
     </div>
-    <div>
-      <a href="/auth/register" class="btn btn-info" role="button">Register</a>
+    <div class="d-flex justify-content-end object-fit-contain">
+      <div class="mr-1">
+        <% if (!user) {%>    
+          <a href="/auth/login" class="btn btn-info" role="button">Log In</a>
+        <% } else { %>
+          <form action="/auth/logout" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Log Out</button>
+          </form>
+        <% } %>
+      </div>
+
+    <% if (!user) { %>
+      <div>
+        <a href="/auth/register" class="btn btn-secondary" role="button">Register</a>
+      </div>
+    <% } %>
     </div>
   </nav>
 </header>
