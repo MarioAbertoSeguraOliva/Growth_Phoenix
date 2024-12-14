@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased] 
+
+## [0.0.5] 2024-12-14
+### Added
+- Added favicon.ico for better branding.
+- Added FontAwesome icons to enhance UI elements.
+- Added admin actions to users table for easier management.
+
 ### Changed
 - Incorporated EJS for rendering dynamic views and templates, allowing the display of user data.
 - Migrated project from CommonJS to ES6 Modules for modern syntax and improved module handling.

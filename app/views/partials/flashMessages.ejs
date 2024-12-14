@@ -1,11 +1,13 @@
-<% if (messages?.error) { %>
+<div class="notifications-container">
+  <% if (messages?.error) { %>
   <div class="alert alert-danger">
     <%= messages.error %>
   </div>
-<% } %>
+  <% } %>
 
-<% if (messages?.success) { %>
+  <% if (messages?.success) { %>
   <div class="alert alert-success">
     <%= messages.success %>
   </div>
-<% } %>
+  <% } %>
+</div>

@@ -107,9 +107,23 @@
         <% if (!user) {%>    
           <a href="/auth/login" class="btn btn-info" role="button">Log In</a>
         <% } else { %>
-          <form action="/auth/logout" method="POST" style="display:inline;">
+          <div class="d-flex">
+            <div class="d-flex p-2">
+              <p class="text-white pt-2"><%= user.email %></p>
+              <a class="nav-link" href="/dashboard">
+                <img
+                  src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                  class="rounded-circle"
+                  height="22"
+                  alt=""
+                  loading="lazy"
+                />
+              </a>
+          </div>
+          <form action="/auth/logout" method="POST" class="pt-1">
             <button type="submit" class="btn btn-danger">Log Out</button>
           </form>
+          </div>
         <% } %>
       </div>
 

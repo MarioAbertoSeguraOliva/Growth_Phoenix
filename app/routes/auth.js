@@ -47,4 +47,11 @@ router.get("/login", (req, res) => {
 
 router.post("/logout", Logout);
 
+router.get("dashboard", (req, res) => {
+  res.render("dashboard", {
+    title: "Dashboard",
+    messages: req.flash(),
+  });
+});
+
 export default router;
