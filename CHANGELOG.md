@@ -2,6 +2,20 @@
 
 ## [Unreleased] 
 
+## [0.0.6] 2024-12-16
+### Added
+- Added SASS support for better styling management.
+- Modified User model with extra fields like `username`, `dateOfBirth`, `gender`, and `profilePhoto`.
+- Added Enums for `AccountStatus`, `gender`, and `roles` for better data consistency and validation.
+- Updated Admin's view (`Users.ejs`) to reflect new user model fields and add functionality for managing roles and statuses.
+
+### Changed
+- Updated user model to include `username` as a non-unique field, a default profile photo, gender options, and date of birth.
+- Enhanced the styling of Admin's user table with icons for verification status.
+
+### Fixed
+- Fixed styling issues related to user forms and dynamic rendering.
+
 ## [0.0.5] 2024-12-14
 ### Added
 - Added favicon.ico for better branding.

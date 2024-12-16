@@ -5,8 +5,9 @@
   "private": true,
   "main": "app.js",
   "scripts": {
+    "scss": "sass src/scss/styles.scss public/css/styles.css --watch",
     "start": "node ./bin/www",
-    "dev": "nodemon -L --ext ejs,js,json,html,css ./bin/www"
+    "dev": "concurrently \"npm run scss\" \"nodemon -L --ext ejs,js,json,html,css,scss ./bin/www\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,11 +24,17 @@
     "bcrypt": "5.1.1",
     "connect-flash": "^0.1.1",
     "express-validator": "7.2.0",
-    "morgan": "~1.9.1"
-  },
-  "devDependencies": {
+    "morgan": "~1.9.1",
     "mongoose": "^8.8.4"
   },
+  "devDependencies": {
+    "sass": "^1.83.0",
+    "nodemon": "^2.0.15",
+    "concurrently": "9.1.0"
+  },
   "author": "Mario A. Segura Oliva <marioalbertoseguraoliva@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0."
+  }
 }

@@ -2,44 +2,89 @@
   <table id="myTable" class="table table-striped text-center">
       <thead>
           <tr>
-              <th>#</th>
-              <th>Email or name</th>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>DoB</th>
+              <th>Gender</th>
+              <th>Photo</th>
+              <th>Phone</th>
+              <th>Verified <i class="fa-regular fa-envelope"></i></th>
+              <th>Verified <i class="fa-solid fa-phone"></i></th>
               <th>Password</th>
-              <th>Status</th>
-              <th>Actions</th>
               <th>Created at</th>
               <th>Updated at</th>
+              <th>Actions</th>
           </tr>
       </thead>
       <tbody>
           <% users.forEach(user => { %>
-          <tr>
-              <td><%= 1 %></td>
+            <% console.log(user);%>
+          <tr class='<%= user.status %>'>
+              <td><%= user.id.slice(-6) %> ...</td>
+              <td><%= user.username %></td>
               <td><%= user.email %></td>
-              <td><%= user.password %></td>
-              <td>STATUS.OK</td>
-              <td class="admin-actions">
-                  <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Watch User (Data User, History)">
-                      <i class="fa-solid fa-user"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Edit User (Update Data, Change Role)">
-                      <i class="fa-solid fa-pen-to-square"></i>
-                  </button>
-                  <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Recover Password, Block, Unblock, 2FA">
-                      <i class="fa-solid fa-key"></i>
-                  </button>
-                  <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Roles">
-                      <i class="fa-solid fa-users"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete User">
-                      <i class="fa-solid fa-xmark"></i>
-                  </button>
-                  <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Send Message">
-                      <i class="fa-regular fa-envelope"></i>
-                  </button>
+              <td><%= user.role %></td>
+              <td>
+                10/11/1936
               </td>
-              <td>11/11/2011</td>
-              <td>11/11/2011</td>
+              <td>
+                <select class="form-select" aria-label="Default user select" disabled>
+                    <% genderChoices.forEach(genderChoice => { %>
+                        <option value="<%= genderChoice %>"
+                          <% if(user.gender === genderChoice) { %>
+                            selected
+                          <% } %>
+                        >
+                          <%= genderChoice %>
+                        </option>
+                      <% }); %>
+                </select>
+              </td>
+
+              <td>
+                <img src="<%= user.profilePhoto %>" width="64" height="64"/>
+              </td>
+              <td>
+                <%= user.phone ? user.phone : '666-666-666'  %>
+               </td>
+              <td>
+                <%= user.isEmailVerified ? 'O' : 'X' %>
+              </td>
+              <td>
+                <%= user.isPhoneVerified ? 'O' : 'X' %>
+              </td>
+              <td class="d-flex">
+                <input class="form-control mr-2" id="user<%= user._id %>HashedPassword" type="password" readonly value="<%= user.password %>" maxlength="10"></input>
+                <button class="btn btn-primary btn-sm" onclick="togglePassword('user<%= user._id %>HashedPassword')">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+              </td>
+              <td>
+                <%= new Date(user.createdAt).toLocaleDateString()  %>
+              </td>
+              <td><%= new Date(user.updatedAt).toLocaleDateString() %></td>
+              <td class="admin-actions">
+                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Watch User (Data User, History)">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Edit User (Update Data, Change Role)">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Recover Password, Block, Unblock, 2FA">
+                    <i class="fa-solid fa-key"></i>
+                </button>
+                <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Roles">
+                    <i class="fa-solid fa-users"></i>
+                </button>
+                <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete User">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Send Message">
+                    <i class="fa-regular fa-envelope"></i>
+                </button>
+            </td>
           </tr>
           <% }) %>
       </tbody>
@@ -52,4 +97,12 @@
       $("#myTable").dataTable();
       $('[data-toggle="tooltip"]').tooltip();
     });
+    
+    function togglePassword(id) {
+        const inputField = document.getElementById(id);
+        inputField.type === "password" 
+            ? inputField.type = "text" 
+            : inputField.type = "password";   
+    }
   </script>
+  
